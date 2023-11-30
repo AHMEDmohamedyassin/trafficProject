@@ -1,0 +1,48 @@
+
+                {/* no js matrix */}
+                <div className='text-lg mb-2 font-bold mt-20'>base matrix : </div>
+                {/* base matrix */}
+                <div className='flex'>
+
+                    {/* vertical counting */}
+                    <div className='flex flex-col'>
+                        <div className='h-[24px] w-max text-[8px]'>D \ O</div>
+                            <div className='h-[40px]'>1</div>
+                            <div className='h-[40px]'>1</div>
+
+                            <div className='h-[40px] mt-6 text-xs font-bold'>D</div>
+                    </div>
+
+                    <div className='overflow-auto'>
+
+                        {/* horizontal counting */}
+                        <div className='flex'>
+                            <div className='w-[70px] h-[24px] text-[#222] text-center'>1</div>
+                            <div className='w-[70px] h-[24px] text-[#222] text-center'>1</div>
+                        </div>
+
+                        {/* the matrix content rows */}
+                        <div className='flex'>
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                        </div>
+                        <div className='flex'>
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                        </div>
+
+                        {/* new destination */}
+                        <div className='flex mt-4'>
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                        </div>
+                    </div>
+
+                    {/* new origin  */}
+                    <div className='flex flex-col ms-4'>
+                            <div className='w-[70px] h-[24px] text-[#222] text-center text-xs font-bold'>new o</div>
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                            <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
+                    </div>
+
+                </div>
