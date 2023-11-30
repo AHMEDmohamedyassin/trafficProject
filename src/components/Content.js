@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 import ContentHook from '../Hooks/ContentHook'
 
 const Content = () => {
-    const {matrixN , setMatrixN , matrix , setMatrix , matrixNFunc , editMatrix , resolve , newMatrix} = ContentHook()
+    const {matrixN , setMatrixN , matrix , setMatrix , matrixNFunc , editMatrix , resolve , newMatrix } = ContentHook()
 
   return (
     <div className='mx-auto max-w-[1200px] px-4 my-10'>
         {/* matrix n */}
-        <div className='flex items-center justify-between flex-wrap w-64 gap-4'>
+        <div className='flex items-center justify-between flex-wrap w-64 gap-4 mb-10'>
             <div className=''>n of matrix : </div>
             <input onChange={matrixNFunc} className='bg-gray-50 w-20 border-gray-500 border-[1px] rounded px-2 py-1' type='number' placeholder='n matrix' />
         </div>
         {/* error %  */}
-        <div className=' my-10 flex items-center justify-between flex-wrap w-64 gap-4'>
+        {/* <div className=' my-10 flex items-center justify-between flex-wrap w-64 gap-4'>
             <div className=''>error precentage : </div>
             <input className='bg-gray-50 w-20 border-gray-500 border-[1px] rounded px-2 py-1' type='number' placeholder='error %' />
-        </div>
+        </div> */}
 
 
         {
