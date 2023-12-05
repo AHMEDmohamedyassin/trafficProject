@@ -1,21 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import ContentHook from '../Hooks/ContentHook'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Content = () => {
-    const {matrixN , setMatrixN , matrix , setMatrix , matrixNFunc , editMatrix , resolve , newMatrix } = ContentHook()
+    const {matrixN , 
+        setMatrixN , 
+        matrix , 
+        setMatrix , 
+        matrixNFunc , 
+        editMatrix , 
+        resolve , 
+        newMatrix ,
+        trials,
+        setTrials,
+        err , 
+        setErr,
+        doneTrials,
+        submit
+    } = ContentHook()
 
   return (
     <div className='mx-auto max-w-[1200px] px-4 my-10'>
-        {/* matrix n */}
-        <div className='flex items-center justify-between flex-wrap w-64 gap-4 mb-10'>
-            <div className=''>n of matrix : </div>
-            <input onChange={matrixNFunc} className='bg-gray-50 w-20 border-gray-500 border-[1px] rounded px-2 py-1' type='number' placeholder='n matrix' />
-        </div>
-        {/* error %  */}
-        {/* <div className=' my-10 flex items-center justify-between flex-wrap w-64 gap-4'>
-            <div className=''>error precentage : </div>
-            <input className='bg-gray-50 w-20 border-gray-500 border-[1px] rounded px-2 py-1' type='number' placeholder='error %' />
-        </div> */}
+        <ToastContainer />
+            {/* matrix n */}
+            <div className='flex items-center justify-between flex-wrap w-64 gap-4 mb-10'>
+                <div className=''>n of matrix : </div>
+                <input onChange={matrixNFunc} className='bg-gray-50 w-24 border-gray-500 border-[1px] rounded px-2 py-1' type='number' placeholder='n matrix' />
+            </div>
+            {/* error %  */}
+            <div className=' my-10 flex items-center justify-between flex-wrap w-64 gap-4'>
+                <div className=''>error precentage : </div>
+                <input defaultValue={err} onChange={(e) => setErr(e.target.value)} className='bg-gray-50 w-24 border-gray-500 border-[1px] rounded px-2 py-1' type='number' placeholder='error 0 - 1' />
+            </div>
+            {/* trials  */}
+            <div className=' my-10 flex items-center justify-between flex-wrap w-64 gap-4'>
+                <div className=''>trials number : </div>
+                <input defaultValue={trials} onChange={e => setTrials(e.target.value)} className='bg-gray-50 w-24 border-gray-500 border-[1px] rounded px-2 py-1' type='number' max={1000000} min={0} placeholder='<1000000' />
+            </div>
 
 
         {
@@ -85,7 +107,7 @@ const Content = () => {
 
                 </div>
 
-                <button onClick={() => resolve()} className='bg-sky-600 px-2 py-1 text-white rounded hover:bg-sky-500'>resolve</button>
+                <button onClick={() => submit()} className='bg-sky-600 px-2 py-1 text-white rounded hover:bg-sky-500'>resolve</button>
             </>                
             ) : null
         }

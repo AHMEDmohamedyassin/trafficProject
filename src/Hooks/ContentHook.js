@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { toast } from 'react-toastify';
 
 const ContentHook = () => {
     const [matrixN , setMatrixN] = useState(0)
     const [matrix , setMatrix] = useState({})
     const [err , setErr] = useState(0.05)
+    const [trials , setTrials] = useState(10000)
+    const [doneTrials , setDoneTrials] = useState(0)
     const [newMatrix , setNewMatrix] = useState({})
     
     // editing number of elements in matrix 
     const matrixNFunc = (e) => {
         const val = parseInt(e.target.value)
-        if(val !== NaN){
-            setMatrixN(val)
-            setMatrix({})
-        }
+        setMatrixN(0)
+        setTimeout(() => {
+            if(val !== NaN){
+                setMatrixN(val)
+                setMatrix({})
+            }
+        } , [50])
     }
 
     // editing matrix
@@ -29,16 +35,20 @@ const ContentHook = () => {
         setMatrix({...matrix , [`${row},${col}`] : val})
     }
 
+    // solving
     const resolve = () => {
         let a = Array(matrixN).fill(0)
         let b = Array(matrixN).fill(1)
         let done = false
 
         let times = 10000
+        let doneTrials = 0
+        if(trials  > 0 && trials < 1000000 ) times = trials
 
         while(!done && times > 0){
 
             times = times - 1
+            doneTrials = doneTrials + 1 
 
             var a_old = a.slice()
             var b_old = b.slice()
@@ -60,19 +70,24 @@ const ContentHook = () => {
     
             // checking error 
             for(let i = 0 ; i < matrixN ; i ++){
-                if((1 - (Math.min(a[i] , a_old[i]) / Math.max(a[i] , a_old[i]))) < err ) {
-                    done = true
+                if(!checkError(a[i] , a_old[i]) ) {
+                    done = false
                     break
                 }
-                if((1 - (Math.min(b[i] , b_old[i]) / Math.max(b[i] , b_old[i]))) < err ) {
-                    done = true
+                if(!checkError(b[i] , b_old[i])) {
+                    done = false
                     break
                 }
+                done  = true
             }
+
+            // console.log(`row factors : ${a}` ,`column factors : ${b}` , `done trials : ${doneTrials}`)
             
         }
 
         createNewMatrix(a , b)
+        setDoneTrials(doneTrials)
+        toast.success('done calculation !')
 
     }
 
@@ -102,7 +117,39 @@ const ContentHook = () => {
         setNewMatrix(m)
     }
 
-    return {matrixN , setMatrixN , matrix , setMatrix , matrixNFunc , editMatrix , resolve , newMatrix}
+    // checking error function
+    function checkError(newV , oldV){
+        const fr = Math.abs((newV - oldV) / oldV)
+        let error = 0.05
+        if(err > 0 ) error = err
+        return fr < error
+    }
+
+    // submitting
+    function submit(){
+        console.log(err)
+        if(parseFloat(err) < 0 || parseFloat(err) >= 1) return toast.error('error must be between 0 and 1')
+        if(trials > 1000000 || trials < 1) return toast.error('trials must be more than 1 or less than million')
+        if(Object.keys(matrix).length < 1) return toast.error('please fill matrix')
+        toast.info('calculating ....')
+        resolve()
+    }
+
+    return {matrixN , 
+        setMatrixN , 
+        matrix , 
+        setMatrix , 
+        matrixNFunc , 
+        editMatrix , 
+        resolve , 
+        newMatrix ,
+        trials,
+        setTrials,
+        err , 
+        setErr,
+        doneTrials,
+        submit
+    }
 }
 
 export default ContentHook
