@@ -49,10 +49,10 @@ const Content = () => {
 
                     {/* vertical counting */}
                     <div className='flex flex-col pe-2'>
-                        <div className='h-[24px] w-max text-[8px]'>D \ O</div>
+                        <div className='h-[40px] w-max text-[8px] flex justify-center items-center'>D \ O</div>
                         {
                             Array(matrixN).fill(0).map((e , index) => (
-                                <div key={index} className='h-[40px]'>{index + 1}</div>
+                                <div key={index} className='h-[40px] flex items-center justify-center '>{index + 1}</div>
                             ))
                         }
                         <div className='h-[40px] mt-4 text-xs font-bold'>D</div>
@@ -61,10 +61,10 @@ const Content = () => {
                     <div className='overflow-auto pb-6'>
 
                         {/* horizontal counting */}
-                        <div className='flex pb-2'>
+                        <div className='flex'>
                             {
                                 Array(matrixN).fill(0).map((e , index) => (
-                                    <div key={index} className='w-[70px] h-[24px] text-[#222] text-center'>{index + 1}</div>
+                                    <input key={index} disabled className='w-[70px] h-[40px] py-0 px-[2px] text-[#222] text-center ' value={index + 1} />
                                 ))
                             }
                         </div>
@@ -97,7 +97,7 @@ const Content = () => {
 
                     {/* new origin  */}
                     <div className='flex flex-col ms-2'>
-                        <div className='w-[70px] h-[24px] mb-2 text-[#222] text-center text-xs font-bold'>new o</div>
+                        <div className='w-[70px] h-[40px] text-[#222] flex justify-center items-center text-center text-xs font-bold'>new o</div>
                         {
                             Array(matrixN).fill(0).map((e , index) => (
                                 <input onChange={(e) => editMatrix(index , 'O' , e.target.value)} key={index} className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={index+1} type='number' />
