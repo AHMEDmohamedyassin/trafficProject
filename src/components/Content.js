@@ -130,7 +130,7 @@ const Content = () => {
                                     ))
                                 }
 
-                                {/* <div className='h-[40px] mt-6 text-xs font-bold'>D</div> */}
+                                <div className='h-[40px] mt-6 text-xs font-bold'>D</div>
                         </div>
 
                         <div className='overflow-auto'>
@@ -158,9 +158,13 @@ const Content = () => {
                             }
 
                             {/* new destination */}
-                            {/* <div className='flex mt-4'>
-                                <input className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500'  placeholder={`1 1`} type='number' />
-                            </div> */}
+                            <div className='flex mt-2'>
+                                {
+                                    Array(matrixN).fill(0).map((e , index) =>(
+                                        <input key={index} value={matrix[`D,${index}`]} disabled className='w-[70px] h-[40px] py-0 px-[2px] bg-sky-100 text-[#222] text-center border-[1px] border-gray-500' type='number' />
+                                    ))
+                                }
+                            </div>
                         </div>
 
                         {/* new origin  */}
@@ -170,9 +174,14 @@ const Content = () => {
                         </div> */}
 
                     </div>
+
+                    <div className='w-full text-start font-bold'>
+                        <span>trials : </span> <span className='text-sky-500'>{doneTrials}</span>
+                    </div>
                 </>
             ) : null
         }
+
         
 
 

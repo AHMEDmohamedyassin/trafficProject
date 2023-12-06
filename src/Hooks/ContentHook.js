@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
 const ContentHook = () => {
@@ -37,6 +37,7 @@ const ContentHook = () => {
 
     // solving
     const resolve = () => {
+        const matrix = correctAttraction()
         let a = Array(matrixN).fill(0)
         let b = Array(matrixN).fill(1)
         let done = false
@@ -125,15 +126,43 @@ const ContentHook = () => {
         return fr < error
     }
 
+    // correcting attraction 
+    function correctAttraction() {    // under develop
+        let sumO = 0
+        let sumD = 0
+        let factor = 0
+        let newD = {}
+
+        for(let i = 0 ; i < matrixN; i++){
+            sumO = sumO + matrix[`${i},O`]
+        }
+
+        for(let i = 0 ; i < matrixN; i++){
+            sumD = sumD + matrix[`D,${i}`]
+        }
+        
+        factor = sumO / sumD
+        
+        for(let i = 0 ; i < matrixN; i++){
+            newD={...newD , [`D,${i}`] : matrix[`D,${i}`] * factor }
+        }
+        
+        let updatedMatrix = {...matrix , ...newD}
+        setMatrix(updatedMatrix)
+        return updatedMatrix
+    }
+
     // submitting
     function submit(){
-        console.log(err)
         if(parseFloat(err) < 0 || parseFloat(err) >= 1) return toast.error('error must be between 0 and 1')
         if(trials > 1000000 || trials < 1) return toast.error('trials must be more than 1 or less than million')
         if(Object.keys(matrix).length < 1) return toast.error('please fill matrix')
         toast.info('calculating ....')
+
         resolve()
     }
+
+    useEffect(() => {console.log(matrix)} , [matrix])
 
     return {matrixN , 
         setMatrixN , 
