@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify';
 
 const ContentHook = () => {
@@ -82,7 +82,7 @@ const ContentHook = () => {
                 done  = true
             }
 
-            // console.log(`row factors : ${a}` ,`column factors : ${b}` , `done trials : ${doneTrials}`)
+            console.log(`row factors : ${a}` ,`column factors : ${b}` , `done trials : ${doneTrials}`)
             
         }
 
@@ -161,8 +161,6 @@ const ContentHook = () => {
 
         resolve()
     }
-
-    useEffect(() => {console.log(matrix)} , [matrix])
 
     return {matrixN , 
         setMatrixN , 
